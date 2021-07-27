@@ -5,20 +5,26 @@ import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { loadDetail } from '../actions/actionDetails';
 import { Link } from 'react-router-dom';
+import { smallImage } from '../util';
 
 const Game = ({ name, release, image, id }) => {
-  //load detail
+  const stringPathId = id.toString();
+  //load detail handler
   const dispatch = useDispatch();
   const loadDetailHandler = () => {
+    document.body.style.overflow = 'hidden';
     dispatch(loadDetail(id));
   }
 
   return (
-    <StyledGame onClick={loadDetailHandler}>
-      <Link to={`/path/${id}`}>
-        <h3>{name}</h3>
+    <StyledGame layoutId={stringPathId} onClick={loadDetailHandler}>
+      <Link to={`/game/${id}`}>
+        <motion.h3 layoutId={`title ${stringPathId}`}>{name}</motion.h3>
         <p>{release}</p>
-        <img src={image} alt={name} />
+        <motion.img
+          layoutId={`image ${stringPathId}`}
+          src={smallImage(image, 640)}
+          alt={name} />
       </Link>
     </StyledGame>
   );
