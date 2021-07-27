@@ -15,8 +15,21 @@ import gamepad from "../img/gamepad.svg";
 //Star Images
 import starEmpty from "../img/star-empty.png";
 import starFull from "../img/star-full.png";
+import { smallImage } from '../util';
+
 
 const GameDetail = ({ pathId }) => {
+    const history = useHistory();
+
+    //Exit Detail
+    const exitDetailHander = (e) => {
+        const element = e.target;
+        if (element.classList.contains("shadow")) {
+            document.body.style.overflow = "auto";
+            history.push("/");
+        }
+    };
+    //data
     const { screen, game, isLoading } = useSelector((state) => state.detail);
     //Get Stars
     const getStars = () => {
@@ -51,11 +64,11 @@ const GameDetail = ({ pathId }) => {
     return (
         <>
             {!isLoading && (
-                <CardShadow>
-                    <Detail>
+                <CardShadow className="shadow" onClick={exitDetailHander}>
+                    <Detail layoutId={pathId}>
                         <Stats>
                             <div className="rating">
-                                <h3>{game.name}</h3>
+                                <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
                                 <p>Rating: {game.rating}</p>
                                 {getStars()}
                             </div>
@@ -73,7 +86,10 @@ const GameDetail = ({ pathId }) => {
                             </Info>
                         </Stats>
                         <Media>
-                            <img src={game.background_image} alt="image" />
+                            <motion.img
+                                layoutId={`image ${pathId}`}
+                                src={smallImage(game.background_image, 1280)}
+                                alt={game.name} />
                         </Media>
                         <Description>
                             <p>{game.description_raw}</p>
@@ -81,7 +97,7 @@ const GameDetail = ({ pathId }) => {
                         <div className="gallery">
                             {screen.results.map((data) => (
                                 <img
-                                    src={data.image}
+                                    src={smallImage(data.image, 1280)}
                                     key={data.id}
                                     alt={data.image}
                                 />
