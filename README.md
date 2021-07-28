@@ -9,7 +9,9 @@
 
 ![image](https://github.com/KhanhDoHoang/Infinite-Gamer/blob/master/IG1.PNG)
 *Homepage*
+
 ![image](https://github.com/KhanhDoHoang/Infinite-Gamer/blob/master/IG2.PNG)
 *Game's detail*
+
 ![image](https://github.com/KhanhDoHoang/Infinite-Gamer/blob/master/IG3.PNG)
 *Search bar*
